@@ -1,9 +1,7 @@
-/**
- * Copyright © 2014, Oracle and/or its affiliates. All rights reserved.
- *
- * JDK 8 MOOC Lesson 3 homework
+/*
+ * Copyright (c) 2017. This belongs to teeman12. Feel free to copy and use
  */
-package mooc.jl.lessonone.assign;
+package tutorials.assign.mooc.streams;
 
 import java.util.*;
 

@@ -2,7 +2,7 @@
  * Copyright (c) 2017. This belongs to teeman12. Feel free to copy and use
  */
 
-package mooc.jl.lessonone.assign;
+package tutorials.assign.mooc.streams;
 
 import java.util.Arrays;
 import java.util.List;

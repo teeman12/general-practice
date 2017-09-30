@@ -1,13 +1,10 @@
-/**
- * Copyright © 2016, Oracle and/or its affiliates. All rights reserved.
- *
- * JDK 8 MOOC Lesson 2 homework
+/*
+ * Copyright (c) 2017. This belongs to teeman12. Feel free to copy and use
  */
-package mooc.jl.lessonone.assign;
+package tutorials.assign.mooc.streams;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;

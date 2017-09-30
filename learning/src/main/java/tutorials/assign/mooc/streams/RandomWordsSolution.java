@@ -1,9 +1,7 @@
-/**
- * Copyright © 2014, Oracle and/or its affiliates. All rights reserved.
- * 
- * JDK 8 MOOC Lesson 3 homework
+/*
+ * Copyright (c) 2017. This belongs to teeman12. Feel free to copy and use
  */
-package mooc.jl.lessonone.assign;
+package tutorials.assign.mooc.streams;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,7 +17,7 @@ import java.util.stream.Collectors;
  *
  * @author Simon Ritter (@speakjava)
  */
-public class RandomWords {
+public class RandomWordsSolution {
   private final List<String> sourceWords;
 
   /**
@@ -27,12 +25,10 @@ public class RandomWords {
    * 
    * @throws IOException If the source words file cannot be read
    */
-  public RandomWords() throws IOException {
-    try (BufferedReader reader = Files.newBufferedReader(Paths.get("C:\\Users\\Nameet\\IdeaProjects\\Learning\\src\\main\\resources\\words"))) {
-       // YOUR CODE HERE
-
+  public RandomWordsSolution() throws IOException {
+    try (BufferedReader reader = Files.newBufferedReader(Paths.get("words"))) {
       sourceWords = reader.lines()
-              .collect(Collectors.toList());
+          .collect(Collectors.toList());
       System.out.println("Loaded " + sourceWords.size() + " words");
     }
   }
@@ -45,11 +41,10 @@ public class RandomWords {
    */
   public List<String> createList(int listSize) {
     Random rand = new Random();
-    List<String> wordList = null; // YOUR CODE HERE
-
-    wordList = rand.ints(listSize,0,listSize)
-            .mapToObj(i -> sourceWords.get(i))
-            .collect(Collectors.toList());
+    
+    List<String> wordList = rand.ints(listSize, 0, sourceWords.size())
+        .mapToObj(sourceWords::get)
+        .collect(Collectors.toList());
 
     return wordList;
   }

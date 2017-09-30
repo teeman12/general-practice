@@ -1,22 +1,19 @@
-/**
- * Copyright © 2014, Oracle and/or its affiliates. All rights reserved.
- *
- * JDK 8 MOOC Lesson 3 homework
+/*
+ * Copyright (c) 2017. This belongs to teeman12. Feel free to copy and use
  */
-package mooc.jl.lessonone.assign;
+package tutorials.assign.mooc.streams;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * @author Simon Ritter (@speakjava)
  * @author Stuart Marks
  */
-public class Lesson3Solution {
+public class Lesson3 {
   /* How many times to repeat the test.  5 seems to give reasonable results */
   private static final int RUN_COUNT = 5;
   
@@ -69,19 +66,26 @@ public class Lesson3Solution {
   static int[][] computeLevenshtein(List<String> wordList, boolean parallel) {
     final int LIST_SIZE = wordList.size();
     int[][] distances = new int[LIST_SIZE][LIST_SIZE];
-    IntStream stream = IntStream.range(0, LIST_SIZE);
-    
-    if (parallel)
-      stream = stream.parallel();  // Convert the stream to a parallel one
-    
-    stream.forEach(i -> {
-      for (int j = 0; j < LIST_SIZE; j++)
-        distances[i][j] = Levenshtein.lev(wordList.get(i), wordList.get(j));
-    });
+    if(parallel){
+      IntStream.range(0,LIST_SIZE)
+              .parallel()
+              .forEach(i -> computeLev(wordList, distances, i));
+    }
+    else{
+      IntStream.range(0,LIST_SIZE)
+              .forEach(i -> computeLev(wordList, distances, i));
+    }
+    // YOUR CODE HERE
     
     return distances;
   }
-  
+
+
+  static void computeLev(List<String> wordList, int [][] distances, int index){
+    final int LIST_SIZE = wordList.size();
+    IntStream.range(0, wordList.size())
+            .forEach(i -> distances[index][i] = Levenshtein.lev(wordList.get(i), wordList.get(index)));
+  }
   /**
    * Process a list of random strings and return a modified list
    * 
@@ -90,18 +94,28 @@ public class Lesson3Solution {
    * @return The list processed in whatever way you want
    */
   static List<String> processWords(List<String> wordList, boolean parallel) {
-    Stream<String> stream;
-    
-    if (parallel)
-      stream = wordList.parallelStream();
-    else
-      stream = wordList.stream();
-    
-    return stream
-        .map(String::toLowerCase)
-        .sorted()
-        .distinct()
-        .collect(Collectors.toList());
+    // YOUR CODE HERE
+    List<String> processedList = null;
+
+    if(parallel){
+      wordList.stream()
+              .filter(s -> (s.length() & 1) == 1)
+              .distinct()
+              .map(String::toUpperCase)
+              .sorted()
+              .collect(Collectors.toList());
+    }
+    else{
+      wordList.parallelStream()
+              .filter(s -> (s.length() & 1) == 1)
+              .distinct()
+              .map(String::toUpperCase)
+              .sorted()
+              .collect(Collectors.toList());
+
+
+    }
+    return null;
   }
 
   /**
@@ -111,11 +125,11 @@ public class Lesson3Solution {
    * @throws IOException If word file cannot be read
    */
   public static void main(String[] args) throws IOException {
-    RandomWordsSolution fullWordList = new RandomWordsSolution();
-    List<String> wordList = fullWordList.createList(100000);
+    RandomWords fullWordList = new RandomWords();
+    List<String> wordList = fullWordList.createList(1000);
 
-//    measure("Sequential", () -> computeLevenshtein(wordList, false));
-//    measure("Parallel", () -> computeLevenshtein(wordList, true));
+    //measure("Sequential", () -> computeLevenshtein(wordList, false));
+    //measure("Parallel", () -> computeLevenshtein(wordList, true));
     
     measure("Sequential", () -> processWords(wordList, false));
     measure("Parallel", () -> processWords(wordList, true));

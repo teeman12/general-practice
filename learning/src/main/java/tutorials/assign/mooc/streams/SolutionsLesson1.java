@@ -1,9 +1,7 @@
-/**
- * Copyright © 2016, Oracle and/or its affiliates. All rights reserved.
- *
- * JDK 8 MOOC Lesson 1 homework
+/*
+ * Copyright (c) 2017. This belongs to teeman12. Feel free to copy and use
  */
-package mooc.jl.lessonone.assign;
+package tutorials.assign.mooc.streams;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +12,7 @@ import java.util.TreeMap;
 /**
  * @author Speakjava (Simon Ritter)
  */
-public class Lesson1 {
+public class SolutionsLesson1 {
   /**
    * Run the exercises to ensure we got the right answers
    */
@@ -42,16 +40,16 @@ public class Lesson1 {
    * Exercise 1
    *
    * Create a string that consists of the first letter of each word in the list
-   * of Strings provided.
+   * of Strings.
    */
   private void exercise1() {
     List<String> list = Arrays.asList(
         "alpha", "bravo", "charlie", "delta", "echo", "foxtrot");
-        /* YOUR CODE HERE */
-    StringBuilder sb = new StringBuilder();
 
+    StringBuilder sb = new StringBuilder();
     list.forEach(s -> sb.append(s.charAt(0)));
-    System.out.println(sb.toString());
+    String result = sb.toString();
+    System.out.println("Exercise 1 result = " + result);
   }
 
   /**
@@ -63,9 +61,7 @@ public class Lesson1 {
     List<String> list = new ArrayList<>(Arrays.asList(
         "alpha", "bravo", "charlie", "delta", "echo", "foxtrot"));
 
-    /* YOUR CODE HERE */
-    list.removeIf(s -> (s.length()%2) == 1 );
-
+    list.removeIf(s -> (s.length() & 1) == 1);
     list.forEach(System.out::println);
   }
 
@@ -77,12 +73,8 @@ public class Lesson1 {
   private void exercise3() {
     List<String> list = new ArrayList<>(Arrays.asList(
         "alpha", "bravo", "charlie", "delta", "echo", "foxtrot"));
-
-    /* YOUR CODE HERE */
     list.replaceAll(String::toUpperCase);
     list.forEach(System.out::println);
-
-
   }
 
   /**
@@ -97,13 +89,10 @@ public class Lesson1 {
     map.put("b", 2);
     map.put("a", 1);
 
-    /* YOUR CODE HERE */
     StringBuilder sb = new StringBuilder();
-
-    map.forEach( (k,v) -> sb.append(k).append(v));
-
-    System.out.println(sb.toString());
-
+    map.forEach((k, v) -> sb.append(String.format("%s%s", k, v)));
+    String result = sb.toString();
+    System.out.println("Exercise 4 result = " + result);
   }
 
   /**
@@ -113,22 +102,17 @@ public class Lesson1 {
    */
   private void exercise5() {
     List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-    /* YOUR CODE HERE */
 
-    Thread t = new Thread(() -> System.out.println(list.size()));
-    Integer i = 7;
-
-    t.start();
-
+    new Thread(() -> list.forEach(System.out::println)).start();
   }
-
-  /**
+  
+ /**
    * Main entry point for application
    *
    * @param args the command line arguments
    */
   public static void main(String[] args) {
-    Lesson1 lesson = new Lesson1();
+    SolutionsLesson1 lesson = new SolutionsLesson1();
     lesson.runExercises();
   }
 }
