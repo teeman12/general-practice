@@ -17,6 +17,7 @@ public class Lesson3 {
   /* How many times to repeat the test.  5 seems to give reasonable results */
   private static final int RUN_COUNT = 5;
   
+
   /**
    * Used by the measure method to determine how long a Supplier takes to
    * return a result.
@@ -32,10 +33,11 @@ public class Lesson3 {
     long endTime = System.nanoTime();
     System.out.printf("%s took %dms%n",
         label, (endTime - startTime + 500_000L) / 1_000_000L);
+
     return result;
   }
 
-  /**
+    /**
    * Repeatedly generate results using a Supplier to eliminate some of the
    * issues of running a micro-benchmark.
    *
@@ -53,6 +55,7 @@ public class Lesson3 {
     return result;
   }
 
+
   /**
    * Computes the Levenshtein distance between every pair of words in the
    * subset, and returns a matrix of distances. This actually computes twice as
@@ -65,7 +68,9 @@ public class Lesson3 {
    */
   static int[][] computeLevenshtein(List<String> wordList, boolean parallel) {
     final int LIST_SIZE = wordList.size();
+
     int[][] distances = new int[LIST_SIZE][LIST_SIZE];
+
     if(parallel){
       IntStream.range(0,LIST_SIZE)
               .parallel()
@@ -76,7 +81,8 @@ public class Lesson3 {
               .forEach(i -> computeLev(wordList, distances, i));
     }
     // YOUR CODE HERE
-    
+
+
     return distances;
   }
 
@@ -133,5 +139,6 @@ public class Lesson3 {
     
     measure("Sequential", () -> processWords(wordList, false));
     measure("Parallel", () -> processWords(wordList, true));
+
   }
 }

@@ -44,6 +44,8 @@ public class Levenshtein {
     Objects.requireNonNull(stringA);
     Objects.requireNonNull(stringB);
 
+
+
     // handle degenerate cases
     if (stringA.equals(stringB))
       return 0;

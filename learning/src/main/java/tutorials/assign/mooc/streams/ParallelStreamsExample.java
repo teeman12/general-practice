@@ -30,6 +30,7 @@ public class ParallelStreamsExample {
 
    private static void forkJoinEx(List<Integer> arr){
      ForkJoinPool fk = new ForkJoinPool(30);
+
      fk.submit( () -> mapCheck(arr));
      try {
          fk.awaitTermination(10, TimeUnit.SECONDS);
@@ -52,7 +53,7 @@ public class ParallelStreamsExample {
     private static  void reduceCheck(List<Integer> arr){
         System.out.println(arr.stream()
                 .parallel()
-                .reduce(10,ParallelStreamsExample::add));
+                .reduce(0,ParallelStreamsExample::add));
     }
 
     private static int add(int total, int num){

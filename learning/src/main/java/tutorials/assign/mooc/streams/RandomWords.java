@@ -43,6 +43,7 @@ public class RandomWords {
    */
   public List<String> createList(int listSize) {
     Random rand = new Random();
+
     List<String> wordList = null; // YOUR CODE HERE
 
     wordList = rand.ints(listSize,0,listSize)

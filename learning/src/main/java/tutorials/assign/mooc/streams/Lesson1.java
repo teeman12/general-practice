@@ -1,13 +1,16 @@
 /*
  * Copyright (c) 2017. This belongs to teeman12. Feel free to copy and use
  */
+//package tutorials.assign.mooc.streams;
 package tutorials.assign.mooc.streams;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 /**
  * @author Speakjava (Simon Ritter)
@@ -48,7 +51,8 @@ public class Lesson1 {
         /* YOUR CODE HERE */
     StringBuilder sb = new StringBuilder();
 
-    list.forEach(s -> sb.append(s.charAt(0)));
+
+    list.forEach( s -> sb.append(s.charAt(0)));
     System.out.println(sb.toString());
   }
 
@@ -63,6 +67,8 @@ public class Lesson1 {
 
     /* YOUR CODE HERE */
     list.removeIf(s -> (s.length()%2) == 1 );
+
+
 
     list.forEach(System.out::println);
   }
@@ -116,7 +122,7 @@ public class Lesson1 {
     Thread t = new Thread(() -> System.out.println(list.size()));
     Integer i = 7;
 
-    t.start();
+
 
   }
 
@@ -125,6 +131,7 @@ public class Lesson1 {
    *
    * @param args the command line arguments
    */
+
   public static void main(String[] args) {
     Lesson1 lesson = new Lesson1();
     lesson.runExercises();

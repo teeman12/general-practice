@@ -20,6 +20,8 @@ import java.util.stream.Stream;
 public class Lesson2 {
   private static final String WORD_REGEXP = "[- .:,]+";
 
+
+
   /**
    * Run the exercises to ensure we got the right answers
    *
@@ -114,6 +116,8 @@ public class Lesson2 {
       System.out.println(c);
 
     }
+
+
   }
   
   /**
@@ -146,13 +150,14 @@ public class Lesson2 {
         Paths.get("C:\\Users\\Nameet\\IdeaProjects\\Learning\\src\\main\\resources\\SonnetI.txt"), StandardCharsets.UTF_8)) {
       /* YOUR CODE HERE */
 
+
       reader.lines()
               .flatMap(s -> Arrays.stream(s.split(WORD_REGEXP)))
               .map(String::toLowerCase)
               .distinct()
               .sorted()
               .forEach(System.out::println);
-    }
+         }
   }
   
   /**
